@@ -1,0 +1,19 @@
+﻿<p>
+    <div>
+        @*<input @onchange="OnChangedColor" @bind="MyColor" @bind:event="oninput" />*@
+        <input @oninput="OnChangedColor" @bind="VariableMyColor"  />
+
+    </div>
+</p>
+
+@code {
+    [Parameter] public string VariableMyColor { get; set; }
+    [Parameter] public EventCallback<string> WriteColor { get; set; }
+
+
+    private async void OnChangedColor(ChangeEventArgs e)
+    {
+        VariableMyColor = e.Value.ToString();
+        await WriteColor.InvokeAsync(VariableMyColor);
+    }
+}

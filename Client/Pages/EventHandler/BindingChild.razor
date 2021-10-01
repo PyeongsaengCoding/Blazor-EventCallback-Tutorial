@@ -1,0 +1,18 @@
+﻿<div>
+    <p>
+        Child Input:  <input @oninput="OnChangeString" />
+    </p>
+</div>
+
+@code{
+    [Parameter]
+    public string BindedString { get; set; }
+    [Parameter]
+    public EventCallback<string> BindedStringChanged { get; set; }
+
+    private async Task OnChangeString(ChangeEventArgs e)
+    {
+        BindedString = e.Value.ToString();
+        await BindedStringChanged.InvokeAsync(BindedString);
+    }
+}

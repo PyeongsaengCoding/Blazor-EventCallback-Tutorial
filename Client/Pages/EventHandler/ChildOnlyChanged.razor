@@ -1,0 +1,15 @@
+﻿<p>
+    <button @onclick="OnClickCallback">
+        Trigger a Parent component method
+    </button>
+
+    <input @oninput="OnInputCallBack" />
+</p>
+
+@code {
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClickCallback { get; set; }
+
+    [Parameter]
+    public EventCallback<ChangeEventArgs> OnInputCallBack { get; set; }
+}
