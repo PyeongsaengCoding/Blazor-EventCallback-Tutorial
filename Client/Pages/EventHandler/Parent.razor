@@ -20,7 +20,7 @@
         @* 자식요소에서 이벤트를 클릭할경우 부모 구성요소의 해당 메서드 "ParentMethodMouseClick" 호출, 
             MouseMessage가 업데이트 되고 부모 구성요소에 표시
            자식에게 메서드를 할당하는 방식.
-        @* 순서: 자식 -> 부모 ParentMethodOnInput 에서 끝남. *@
+        @* 순서: 메서드가 할당되어있어 디버깅해보면 부모 ParentMethodOnInput 에서 끝남. *@
         <BasicEventCallback OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput" />
         <div class="d-flex">
             <p class="mr-2">@Mousemessage</p>
