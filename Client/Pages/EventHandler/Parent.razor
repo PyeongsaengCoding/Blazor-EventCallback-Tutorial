@@ -17,9 +17,11 @@
 
     <div class="d-flex flex-column mb-3">
         <h2 class="mb-2">ParentToChild example</h2>
-        @* 자식의 이벤트와 부모의 이벤트가 연동이 되는 듯 하다. 작동원리는 잘 모르겠다.  *@
-        @* 순서: 부모 ParentMethodOnInput -> 자식 OnInputCallBack*@
-        <ParentToChild OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput"/>
+        @* 자식요소에서 이벤트를 클릭할경우 부모 구성요소의 해당 메서드 "ParentMethodMouseClick" 호출, 
+            MouseMessage가 업데이트 되고 부모 구성요소에 표시
+           자식에게 메서드를 할당하는 방식.
+        @* 순서: 자식 -> 부모 ParentMethodOnInput 에서 끝남. *@
+        <BasicEventCallback OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput" />
         <div class="d-flex">
             <p class="mr-2">@Mousemessage</p>
             <p>@inputMessage</p>
