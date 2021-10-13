@@ -12,4 +12,11 @@
 
     [Parameter]
     public EventCallback<ChangeEventArgs> OnInputCallBack { get; set; }
+
+
+    protected override Task OnParametersSetAsync()
+    {
+        return base.OnParametersSetAsync();
+    }
+
 }

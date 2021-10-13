@@ -5,18 +5,21 @@
         <h2 class="mb-2">Parent-child Binding example</h2>
 
         @*BindingChild 속성으로 bind-{var(변수)} 일경우 반드시 child 컴포넌트에 해당 변수에대한 Changed가 있어야한다
-            
-           부모컴포넌트에서 child의 BindedString과 bind를 할경우  child에는 BidnedStringChanged가 있어야 한다는 이야기.
+
+        부모컴포넌트에서 child의 BindedString과 bind를 할경우  child에는 BidnedStringChanged가 있어야 한다는 이야기.
         *@
+
+        @* 순서: 자식 OnChangeString -> 부모  BindingString*@
         <BindingChild @bind-BindedString="@BindingString" />
 
         부모 string = @BindingString
     </div>
 
     <div class="d-flex flex-column mb-3">
-        <h2 class="mb-2">ChildOnlyChanged example</h2>
-        @* 자식 구성 요소 이벤트가(ex oninput을 할경우 OnInputCablack 메서드가) 발생할 때 부모 구성 요소의 메서드를 실행합니다. *@
-        <ChildOnlyChanged OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput" />
+        <h2 class="mb-2">ParentToChild example</h2>
+        @* 자식의 이벤트와 부모의 이벤트가 연동이 되는 듯 하다. 작동원리는 잘 모르겠다.  *@
+        @* 순서: 부모 ParentMethodOnInput -> 자식 OnInputCallBack*@
+        <ParentToChild OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput"/>
         <div class="d-flex">
             <p class="mr-2">@Mousemessage</p>
             <p>@inputMessage</p>
@@ -27,8 +30,9 @@
     <div class="d-flex flex-column mb-3">
         <h2 class="mb-2">ChildToParent example</h2>
         @* 자식의 특정이벤트(Oninput이벤트에서 OnChangedColor메서드를)
-           실행시 해당 콜백을통해 WriteColor메서드 실행 *@
-        <ChildToParent WriteColor="WriteColor" VariableMyColor="@MyColor"/>
+        실행시 해당 콜백을통해 WriteColor메서드 실행 *@
+        @* 순서: 자식  OnChangedColor -> 부모 WriteColor *@
+        <ChildToParent WriteColor="WriteColor" VariableMyColor="@MyColor"  />
 
         <p>MyColor : @MyColor</p>
     </div>
@@ -43,7 +47,7 @@
 @code {
     #region Bindingchild.razor
 
-    public string BindingString;
+    public string BindingString { get; set; }
 
     #endregion
 
