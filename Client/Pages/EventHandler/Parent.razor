@@ -1,26 +1,29 @@
 ﻿@page "/parent"
 
 <div class="d-flex flex-column">
+
+    @* Bindingchild *@
     <div class="d-flex flex-column mb-3">
         <h2 class="mb-2">Parent-child Binding example</h2>
 
         @*BindingChild 속성으로 bind-{var(변수)} 일경우 반드시 child 컴포넌트에 해당 변수에대한 Changed가 있어야한다
 
-        부모컴포넌트에서 child의 BindedString과 bind를 할경우  child에는 BidnedStringChanged가 있어야 한다는 이야기.
+            부모컴포넌트에서 child의 BindedString과 bind를 할경우  child에는 BidnedStringChanged가 있어야 한다는 이야기.
         *@
 
         @* 순서: 자식 OnChangeString -> 부모  BindingString*@
-        <BindingChild @bind-BindedString="@BindingString" />
+        <BindingChild @bind-BindedString="@BindingString" ReturnNoneType="@GetNoneType" />
 
         부모 string = @BindingString
     </div>
 
+    @* ChildOnlyChanged *@
     <div class="d-flex flex-column mb-3">
         <h2 class="mb-2">ParentToChild example</h2>
-        @* 자식요소에서 이벤트를 클릭할경우 부모 구성요소의 해당 메서드 "ParentMethodMouseClick" 호출, 
-            MouseMessage가 업데이트 되고 부모 구성요소에 표시
-           자식에게 메서드를 할당하는 방식.
-        @* 순서: 메서드가 할당되어있어 디버깅해보면 부모 ParentMethodOnInput 에서 끝남. *@
+        @* 자식요소에서 이벤트를 클릭할경우 부모 구성요소의 해당 메서드 "ParentMethodMouseClick" 호출,
+                MouseMessage가 업데이트 되고 부모 구성요소에 표시
+               자식에게 메서드를 할당하는 방식.
+            @* 순서: 메서드가 할당되어있어 디버깅해보면 부모 ParentMethodOnInput 에서 끝남. *@
         <BasicEventCallback OnClickCallback="@ParentMethodMouseClick" OnInputCallBack="@ParentMethodOnInput" />
         <div class="d-flex">
             <p class="mr-2">@Mousemessage</p>
@@ -29,12 +32,13 @@
 
     </div>
 
+    @* Child To Parent *@
     <div class="d-flex flex-column mb-3">
         <h2 class="mb-2">ChildToParent example</h2>
         @* 자식의 특정이벤트(Oninput이벤트에서 OnChangedColor메서드를)
-        실행시 해당 콜백을통해 WriteColor메서드 실행 *@
+            실행시 해당 콜백을통해 WriteColor메서드 실행 *@
         @* 순서: 자식  OnChangedColor -> 부모 WriteColor *@
-        <ChildToParent WriteColor="WriteColor" VariableMyColor="@MyColor"  />
+        <ChildToParent WriteColor="WriteColor" VariableMyColor="@MyColor" />
 
         <p>MyColor : @MyColor</p>
     </div>
@@ -50,6 +54,11 @@
     #region Bindingchild.razor
 
     public string BindingString { get; set; }
+
+    private async Task GetNoneType()
+    {
+        Console.WriteLine("GetNoneType  Method");
+    }
 
     #endregion
 

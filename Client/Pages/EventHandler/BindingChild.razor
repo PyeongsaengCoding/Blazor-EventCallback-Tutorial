@@ -2,6 +2,10 @@
     <p>
         Child Input:  <input @oninput="OnChangeString" />
     </p>
+
+    <p>
+        <button class="btn btn-primary" @onclick="OnReturnNoneType">Return None Type Button</button>
+    </p>
 </div>
 
 @code{
@@ -10,9 +14,17 @@
     [Parameter]
     public EventCallback<string> BindedStringChanged { get; set; }
 
+    [Parameter]
+    public EventCallback ReturnNoneType { get; set; }
+
     private async Task OnChangeString(ChangeEventArgs e)
     {
         BindedString = e.Value.ToString();
         await BindedStringChanged.InvokeAsync(BindedString);
+    }
+
+    private async Task OnReturnNoneType()
+    {
+        await ReturnNoneType.InvokeAsync();
     }
 }
