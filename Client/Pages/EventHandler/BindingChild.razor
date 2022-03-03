@@ -10,17 +10,17 @@
 
 @code{
     [Parameter]
-    public string BindedString { get; set; }
+    public string BindingString { get; set; }
     [Parameter]
-    public EventCallback<string> BindedStringChanged { get; set; }
+    public EventCallback<string> BindingStringChanged { get; set; }
 
     [Parameter]
     public EventCallback ReturnNoneType { get; set; }
 
     private async Task OnChangeString(ChangeEventArgs e)
     {
-        BindedString = e.Value.ToString();
-        await BindedStringChanged.InvokeAsync(BindedString);
+        BindingString = e.Value.ToString();
+        await BindingStringChanged.InvokeAsync(BindingString);
     }
 
     private async Task OnReturnNoneType()
